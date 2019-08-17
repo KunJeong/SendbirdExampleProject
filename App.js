@@ -18,7 +18,7 @@ import Member from './src/screens/Member';
 import BlockUser from './src/screens/BlockUser';
 import GroupChannel from './src/screens/GroupChannel';
 import GroupChannelInvite from './src/screens/GroupChannelInvite';
-import appStateChangeHandler from './src/appStateChangeHandler';
+// import appStateChangeHandler from './src/appStateChangeHandler';
 
 let AppNavigator;
 let AppContainer;
@@ -26,7 +26,7 @@ let AppContainer;
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.appStateHandler = appStateChangeHandler.getInstance();
+    // this.appStateHandler = appStateChangeHandler.getInstance();
     AppNavigator = createStackNavigator(
       {
         Start: { screen: Start },
@@ -61,12 +61,12 @@ export default class App extends Component {
 
     console.disableYellowBox = true;
     console.log('app is launched');
-    AppState.addEventListener('change', this._handleAppStateChange);
+    // AppState.addEventListener('change', this._handleAppStateChange);
   }
 
   componentWillUnmount() {
     console.log('app is killed');
-    AppState.removeEventListener('change', this._handleAppStateChange);
+    // AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   render() {
@@ -86,7 +86,7 @@ export default class App extends Component {
         }
         console.log('app is into foreground');
         sb.setForegroundState();
-        this.appStateHandler.notify();
+        // this.appStateHandler.notify();
       } else if (nextAppState === 'background') {
         console.log('app is into background');
         sb.setBackgroundState();

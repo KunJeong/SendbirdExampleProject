@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { initProfile, getCurrentUserInfo, updateProfile } from '../actions';
-import { Button, Avatar, FormLabel, FormInput, FormValidationMessage, Spinner } from '../components';
+import { Button, Avatar, Input} from 'react-native-elements';
+import { Spinner } from '../components';
 
 class Profile extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -94,18 +95,18 @@ class Profile extends Component {
           />
         </View>
 
-        <FormLabel labelStyle={[styles.defaultMargin, { marginTop: 20, fontSize: 13, fontWeight: '400' }]}>
-          Nickname
-        </FormLabel>
-        <FormInput
+        <Input
+          labelStyle={[styles.defaultMargin, { marginTop: 20, fontSize: 13, fontWeight: '400' }]}
+          label='Nickname'
           containerStyle={styles.defaultMargin}
           selectionColor={'#000'}
           inputStyle={{ color: '#000' }}
           value={this.state.nickname}
           maxLength={12}
           onChangeText={this._onNicknameChanged}
+          errorStyle={{ marginLeft: 14 }}
+          error={ this.props.error }
         />
-        <FormValidationMessage labelStyle={{ marginLeft: 14 }}>{this.props.error}</FormValidationMessage>
       </View>
     );
   }

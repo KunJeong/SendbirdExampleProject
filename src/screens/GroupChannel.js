@@ -224,23 +224,23 @@ class GroupChannel extends Component {
                 onPress: () => { this._onChannelHide(channel.url) },
             }
         ]
-        // return (
+        return (
         //     // <Swipeout
         //     //     right={swipeoutBtns}
         //     //     autoClose={true}>
-        //         // <ListItem
-        //         //     component={TouchableHighlight}
-        //         //     containerStyle={{backgroundColor: '#fff'}}
-        //         //     key={channel.url}
-        //         //     avatar={<Avatar source={{uri: channel.coverUrl}} />}
-        //         //     title={this._renderTitle(channel)}
-        //         //     titleStyle={{fontWeight: '500', fontSize: 16}}
-        //         //     subtitle={this._renderLastMessage(channel)}
-        //         //     subtitleStyle={{fontWeight: '300', fontSize: 11}}
-        //         //     onPress={ () => this._onListItemPress(channel.url) }
-        //         // />
+                <ListItem
+                    component={TouchableHighlight}
+                    containerStyle={{backgroundColor: '#fff'}}
+                    key={channel.url}
+                    avatar={<Avatar source={{uri: channel.coverUrl}} />}
+                    title={this._renderTitle(channel)}
+                    titleStyle={{fontWeight: '500', fontSize: 16}}
+                    subtitle={this._renderLastMessage(channel)}
+                    subtitleStyle={{fontWeight: '300', fontSize: 11}}
+                    onPress={ () => this._onListItemPress(channel.url) }
+                />
         //     // </Swipeout>
-        // )
+        )
     }
 
     render() {

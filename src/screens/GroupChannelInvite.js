@@ -185,18 +185,19 @@ class GroupChannelInvite extends Component {
     }
 
     _renderList = (rowData) => {
+        const user = rowData.item
         return (
             <ListItem
                 component={TouchableHighlight}
                 containerStyle={{backgroundColor: '#fff'}}
-                key={rowData.userId}
+                key={user.userId}
                 avatar={(
                     <Avatar 
                         rounded
-                        source={rowData.profileUrl ? {uri: rowData.profileUrl} : require('../img/icon_sb_68.png')} 
+                        source={user.profileUrl ? {uri: user.profileUrl} : require('../img/icon_sb_68.png')} 
                     />
                 )}
-                title={rowData.nickname}
+                title={user.nickname}
                 titleStyle={{fontWeight: '500', fontSize: 16, marginLeft: 8}}
                 leftIcon={(
                     <Icon 
@@ -204,12 +205,12 @@ class GroupChannelInvite extends Component {
                         iconStyle={{padding: 0, margin: 0}}
                         name='check-circle-o' 
                         type='font-awesome'
-                        color={rowData.isSelected ? '#6741D9' : '#e3e3e3'}
+                        color={user.isSelected ? '#6741D9' : '#e3e3e3'}
                         size={18}
                     />
                 )}
                 rightIcon={( <Text></Text> )}
-                onPress={ () => this._onListItemPress(rowData) }
+                onPress={ () => this._onListItemPress(user) }
             />
         )
     }
@@ -244,13 +245,13 @@ class GroupChannelInvite extends Component {
                 </View>
 
                 <View style={{}}>
-                    {/* <ListView
+                    <FlatList
                         enableEmptySections={true}
-                        renderRow={this._renderList}
-                        dataSource={this.state.userList}
+                        renderItem={this._renderList}
+                        data={this.state.list}
                         onEndReached={() => this._getUserList(false)}
                         onEndReachedThreshold={-50}
-                    /> */}
+                    />
                 </View>
             </View>
         )
