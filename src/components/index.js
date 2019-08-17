@@ -1,6 +1,11 @@
+export * from './Input';
+export * from './Spinner';
 export * from './Message';
+export * from './MessageItem';
+export * from './ImageItem';
+export * from './MessageInput';
+export * from './Hr';
+export * from './MessageContainer';
 export * from './MessageAvatar';
 export * from './MessageBubble';
-export * from './MessageContainer';
-export * from './MessageInput';
-export * from './MessageItem';
+export { Button, Icon, Avatar, FormLabel, FormInput, FormValidationMessage, ListItem } from 'react-native-elements';
