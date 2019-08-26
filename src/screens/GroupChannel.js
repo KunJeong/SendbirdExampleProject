@@ -43,7 +43,7 @@ class GroupChannel extends Component {
                 <Button 
                     containerViewStyle={{marginLeft: 0, marginRight: 0}}
                     buttonStyle={{paddingLeft: 0, paddingRight: 14}}
-                    iconRight={{ name: 'user-plus', type: 'font-awesome', color: '#7d62d9', size: 18 }}
+                    icon={{ name: 'user-plus', type: 'font-awesome', color: '#7d62d9', size: 18 }}
                     backgroundColor='transparent'
                     onPress={ () => { navigation.navigate('GroupChannelInvite', { title: 'Group Channel Create', channelUrl: null }) } }
                 />

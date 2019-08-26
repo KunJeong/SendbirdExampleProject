@@ -38,7 +38,7 @@ class Chat extends Component {
         <Button
           containerViewStyle={{ marginLeft: 0, marginRight: 0 }}
           buttonStyle={{ paddingLeft: 0, paddingRight: 0 }}
-          iconRight={{ name: 'user-plus', type: 'font-awesome', color: '#7d62d9', size: 18 }}
+          icon={{ name: 'user-plus', type: 'font-awesome', color: '#7d62d9', size: 18 }}
           backgroundColor="transparent"
           onPress={() => {
             navigation.navigate('GroupChannelInvite', {
@@ -68,7 +68,7 @@ class Chat extends Component {
           <Button
             containerViewStyle={{ marginLeft: 0, marginRight: 0 }}
             buttonStyle={{ paddingLeft: 4, paddingRight: 4 }}
-            iconRight={{ name: 'users', type: 'font-awesome', color: '#7d62d9', size: 18 }}
+            icon={{ name: 'users', type: 'font-awesome', color: '#7d62d9', size: 18 }}
             backgroundColor="transparent"
             onPress={() => {
               navigation.navigate('Member', { isOpenChannel: params.isOpenChannel, channelUrl: params.channelUrl });
@@ -77,7 +77,7 @@ class Chat extends Component {
           <Button
             containerViewStyle={{ marginLeft: 0, marginRight: 0 }}
             buttonStyle={{ paddingLeft: 0, paddingRight: 14 }}
-            iconRight={{ name: 'user-times', type: 'font-awesome', color: '#7d62d9', size: 18 }}
+            icon={{ name: 'user-times', type: 'font-awesome', color: '#7d62d9', size: 18 }}
             backgroundColor="transparent"
             onPress={() => {
               navigation.navigate('BlockUser');

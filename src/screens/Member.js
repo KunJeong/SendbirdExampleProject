@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { 
     initMember, 
@@ -31,8 +31,7 @@ class Member extends Component {
         this.state = {
             isLoading: false,
             participantListQuery: null,
-            list: [],
-            memberList: ds.cloneWithRows([])
+            list: []
         }
     }
 
@@ -45,7 +44,7 @@ class Member extends Component {
         
         if (list !== this.props.list) {        
             const newList = [...this.state.list, ...list];
-            this.setState({ isLoading: false, list: newList, memberList: ds.cloneWithRows(newList) });
+            this.setState({ isLoading: false, list: newList });
         }
     }
     
@@ -85,25 +84,26 @@ class Member extends Component {
 
     _getGroupChannelMemberList = () => {
         const { channelUrl } = this.props.navigation.state.params;
-        this.setState({ isLoading: true, list: [], memberList: ds.cloneWithRows([]) }, () => {
+        this.setState({ isLoading: true, list: [] }, () => {
             this.props.getMemberList(channelUrl);
         });
     }    
     
     _renderList = (rowData) => {
+        const user = rowData.item
         return (
             <ListItem
                 containerStyle={{backgroundColor: '#fff'}}
                 avatar={(
                     <Avatar 
                         rounded
-                        source={rowData.profileUrl ? {uri: rowData.profileUrl} : require('../img/icon_sb_68.png')} 
+                        source={user.profileUrl ? {uri: user.profileUrl} : require('../img/icon_sb_68.png')} 
                     />
                 )}
-                title={rowData.nickname}
+                title={user.nickname}
                 titleStyle={{fontWeight: '500', fontSize: 16}}
-                rightTitle={rowData.isOnline}
-                rightTitleStyle={{color: rowData.isOnline === 'online' ? '#37b24d' : '#878D99'}}
+                rightTitle={user.isOnline}
+                rightTitleStyle={{color: user.isOnline === 'online' ? '#37b24d' : '#878D99'}}
                 rightIcon={<Text></Text>}
             />
         )
@@ -112,14 +112,14 @@ class Member extends Component {
     render() {
         return (
             <View>
-                {/* <Spinner visible={this.state.isLoading} /> */}
-                {/* <ListView
+                <Spinner visible={this.state.isLoading} />
+                <FlatList
                     enableEmptySections={true}
-                    renderRow={this._renderList}
-                    dataSource={this.state.memberList}
+                    renderItem={this._renderList}
+                    data={this.state.list}
                     onEndReached={() => this._getMemberList(false)}
                     onEndReachedThreshold={-50}
-                /> */}
+                />
             </View>
         )
     }

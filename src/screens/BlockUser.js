@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, Alert } from 'react-native';
+import { View, Text, TouchableHighlight, Alert, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { initBlockUser, getBlockUserList, onUnblockUserPress } from '../actions';
 import { Button, Spinner, ListItem, Avatar } from '../components';
@@ -27,8 +27,7 @@ class BlockUser extends Component {
         this.state = {
             isLoading: false,
             blockedUserListQuery: null,
-            list: [],
-            blockUserList: ds.cloneWithRows([])
+            list: []
         }
     }
 
@@ -41,14 +40,14 @@ class BlockUser extends Component {
         
         if (list !== this.props.list) {        
             const newList = [...this.state.list, ...list];
-            this.setState({ isLoading: false, list: newList, blockUserList: ds.cloneWithRows(newList) });
+            this.setState({ isLoading: false, list: newList });
         }
 
         if (unblockedUserId !== this.props.unblockedUserId) {
             const newList = this.state.list.filter((user) => {
                 return user.userId !== unblockedUserId;
             });
-            this.setState({ isLoading: false, list: newList, blockUserList: ds.cloneWithRows(newList) });
+            this.setState({ isLoading: false, list: newList });
         }
     }
 
@@ -90,23 +89,24 @@ class BlockUser extends Component {
     }
     
     _renderList = (rowData) => {
+        const user = rowData.item
         return (
             <ListItem
-                key={rowData.userId}
+                key={user.userId}
                 component={TouchableHighlight}
                 containerStyle={{backgroundColor: '#fff'}}
                 avatar={(
                     <Avatar 
                         rounded
-                        source={rowData.profileUrl ? {uri: rowData.profileUrl} : require('../img/icon_sb_68.png')} 
+                        source={user.profileUrl ? {uri: user.profileUrl} : require('../img/icon_sb_68.png')} 
                     />
                 )}
-                title={rowData.nickname}
+                title={user.nickname}
                 titleStyle={{fontWeight: '500', fontSize: 16}}
-                rightTitle={rowData.isOnline}
+                rightTitle={user.isOnline}
                 rightTitleStyle={{color: '#37b24d'}}
                 rightIcon={<Text></Text>}
-                onPress={() => this._onUnblockUserPress(rowData.userId)}
+                onPress={() => this._onUnblockUserPress(user.userId)}
             />
         )
     }
@@ -115,13 +115,13 @@ class BlockUser extends Component {
         return (
             <View>
                 <Spinner visible={this.state.isLoading} />
-                {/* <ListView
+                <FlatList
                     enableEmptySections={true}
-                    renderRow={this._renderList}
-                    dataSource={this.state.blockUserList}
+                    renderItem={this._renderList}
+                    data={this.state.list}
                     onEndReached={() => this._getBlockUserList(false)}
                     onEndReachedThreshold={-100}
-                /> */}
+                />
             </View>
         )
     }

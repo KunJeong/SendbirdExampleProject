@@ -8,4 +8,4 @@ export * from './Hr';
 export * from './MessageContainer';
 export * from './MessageAvatar';
 export * from './MessageBubble';
-export { Button, Icon, Avatar, FormLabel, FormInput, FormValidationMessage, ListItem } from 'react-native-elements';
+export { Button, Icon, Avatar, Input, ListItem } from 'react-native-elements';
